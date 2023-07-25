@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .error {
+    margin: 0 auto;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .progress-bar {
+    display: flex;
+    margin: 0 auto;
+  }
+}

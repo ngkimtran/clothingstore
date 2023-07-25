@@ -1,0 +1,36 @@
+.contact {
+  background: #2879fe;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+
+  .wrapper {
+    text-transform: uppercase;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      text-transform: uppercase;
+      padding: 10px;
+      color: #fff;
+      background: #333;
+      border-radius: 0 5px 5px 0;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px 0 0 5px;
+    }
+
+    .icons {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
