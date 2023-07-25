@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Link } from "react-router-dom";
-import "./Header.scss";
 import Cart from "../Cart/Cart";
+import { RootState } from "../redux/store";
+import "./Header.scss";
 
 const Header = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const products = useSelector((state: RootState) => state.cart.products);
 
   return (
     <div className="navbar">
@@ -81,7 +84,7 @@ const Header = () => {
             <FavoriteBorderOutlinedIcon />
             <div className="cartIcon" onClick={() => setOpen(!open)}>
               <ShoppingCartOutlinedIcon />
-              <span>0</span>
+              <span>{products.length}</span>
             </div>
           </div>
         </div>

@@ -63,3 +63,7 @@ export type FilterParamsPropsType = {
   sortBy: string;
   selectedSubCats: string[] | undefined;
 };
+
+export type UserCartPropsType = ProductDataFields & {
+  quantity: number;
+};

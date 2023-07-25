@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
 import useFetch from "../../hooks/useFetch";
 import { ProductDataFields } from "../../types/DataTypes";
+import { addToCart } from "../../components/redux/cartReducer";
 import "./Product.scss";
 
 const Product = () => {
@@ -16,7 +18,8 @@ const Product = () => {
   const { data, loading, error } = useFetch<ProductDataFields>(
     `/api/products/${id}?populate=*`
   );
-  // console.log(data);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="product">
@@ -37,6 +40,7 @@ const Product = () => {
                         image.attributes.url
                       }
                       alt=""
+                      key={image.id}
                       onClick={() => setSelectedImg(index)}
                     />
                   ))}
@@ -75,7 +79,17 @@ const Product = () => {
                 </button>
               </div>
 
-              <button className="add">
+              <button
+                className="add"
+                onClick={() =>
+                  dispatch(
+                    addToCart({
+                      ...data!,
+                      quantity: productQuantity,
+                    })
+                  )
+                }
+              >
                 <AddShoppingCartIcon /> ADD TO CART
               </button>
 
