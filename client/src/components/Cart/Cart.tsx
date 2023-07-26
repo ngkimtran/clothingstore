@@ -6,7 +6,6 @@ import { RootState } from "../redux/store";
 import "./Cart.scss";
 import { removeFromCart, resetCart } from "../redux/cartReducer";
 import { makeRequest } from "../../makeRequest";
-import axios from "axios";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
