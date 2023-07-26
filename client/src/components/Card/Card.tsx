@@ -5,8 +5,13 @@ import "./Card.scss";
 const Card = ({ item }: SingleProductPropsType) => {
   const { category } = useParams();
 
+  const altCategory = item.attributes.categories.data[0].attributes.title;
+
   return (
-    <Link className="link" to={`/products/${category}/${item.id}`}>
+    <Link
+      className="link"
+      to={`/products/${category ? category : altCategory}/${item.id}`}
+    >
       <div className="card">
         <div className="images">
           {item.attributes?.images?.data ? (

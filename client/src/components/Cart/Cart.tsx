@@ -1,13 +1,35 @@
 import { useSelector, useDispatch } from "react-redux";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import ClearIcon from "@mui/icons-material/Clear";
+import { loadStripe } from "@stripe/stripe-js";
 import { RootState } from "../redux/store";
 import "./Cart.scss";
 import { removeFromCart, resetCart } from "../redux/cartReducer";
+import { makeRequest } from "../../makeRequest";
+import axios from "axios";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY!);
 
 const Cart = () => {
   const products = useSelector((state: RootState) => state.cart.products);
   const dispatch = useDispatch();
+
+  const handlePayment = async () => {
+    try {
+      const stripe = await stripePromise;
+      const res = await makeRequest.post("/api/orders", {
+        products,
+      });
+
+      await stripe?.redirectToCheckout({
+        sessionId: res.data.stripeSession.id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="cart">
@@ -55,7 +77,9 @@ const Cart = () => {
         </span>
       </div>
 
-      <button className="checkout">PROCEED TO CHECKOUT</button>
+      <button className="checkout" onClick={handlePayment}>
+        PROCEED TO CHECKOUT
+      </button>
 
       <div className="clear" onClick={() => dispatch(resetCart())}>
         <ClearIcon />

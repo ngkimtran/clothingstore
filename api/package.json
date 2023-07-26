@@ -14,7 +14,8 @@
     "@strapi/plugin-users-permissions": "4.11.5",
     "@strapi/strapi": "4.11.5",
     "mysql": "2.18.1",
-    "mysql2": "^3.5.2"
+    "mysql2": "^3.5.2",
+    "stripe": "^12.14.0"
   },
   "author": {
     "name": "A Strapi developer"

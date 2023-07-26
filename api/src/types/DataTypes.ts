@@ -1,4 +1,4 @@
-export enum ProductType {
+enum ProductType {
   normal = "normal",
   featured = "featured",
   trending = "trending",
@@ -30,20 +30,7 @@ type ImageDataFields = {
     | null;
 };
 
-type ProductCategoryFields = {
-  data: {
-    id: number;
-    attributes: {
-      createdAt: string;
-      desc: string;
-      publishedAt: string;
-      title: string;
-      updatedAt: string;
-    };
-  }[];
-};
-
-export type ProductDataFields = {
+type ProductDataFields = {
   id: number;
   attributes: {
     title: string;
@@ -52,29 +39,10 @@ export type ProductDataFields = {
     newPrice: number;
     oldPrice?: number | undefined;
     isNew: boolean;
-    categories: ProductCategoryFields;
+    categories: string;
     sub_categories: string;
     type: ProductType;
   };
-};
-
-export type SingleProductPropsType = {
-  item: ProductDataFields;
-};
-
-export type HighlightProductsPropsType = {
-  type: string;
-};
-
-export type ListPropsType = {
-  category: string | undefined;
-  filterParams: FilterParamsPropsType;
-};
-
-export type FilterParamsPropsType = {
-  price: number[];
-  sortBy: string;
-  selectedSubCats: string[] | undefined;
 };
 
 export type UserCartPropsType = ProductDataFields & {
